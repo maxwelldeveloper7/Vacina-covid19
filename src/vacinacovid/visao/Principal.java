@@ -71,14 +71,12 @@ public class Principal extends JFrame{
         menu = new JMenuBar();
         setJMenuBar(menu);        
         
-        mnuCadastros = new JMenu("Cadastros");
+        mnuCadastros = new JMenu("Menu");
         menu.add(mnuCadastros);
-        mnuEntrada = new JMenuItem("Entrada de Material");
+        mnuEntrada = new JMenuItem("Cadastrar Vacinante");
         mnuCadastros.add(mnuEntrada);
-        mnuSaida = new JMenuItem("Saída de Material");
+        mnuSaida = new JMenuItem("Realizar Backup");
         mnuCadastros.add(mnuSaida);
-        mnuManutencao = new JMenuItem("Manutenção de Estoque");
-        mnuCadastros.add(mnuManutencao);
         
     }
 
@@ -120,7 +118,15 @@ public class Principal extends JFrame{
         
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         barraRolagem = new JScrollPane(tabela);
+        pesquisar(modelo);
+    }
+
+    private void pesquisar(DefaultTableModel modelo) {
+        modelo.setNumRows(0);
         
+        //instanciar o DAO
+        
+        //preencher a tabela com a lista
     }
     
     
