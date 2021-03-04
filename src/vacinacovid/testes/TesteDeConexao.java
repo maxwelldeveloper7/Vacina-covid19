@@ -14,6 +14,7 @@ import vacinacovid.daos.ConexaoPostgres;
  */
 public class TesteDeConexao {
     public static void main(String[] args){
-        
+        ConexaoPostgres.conectar();
+        ConexaoPostgres.desconectar();
     }
 }
