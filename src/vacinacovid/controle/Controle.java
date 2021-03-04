@@ -1,0 +1,49 @@
+package vacinacovid.controle;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.metal.OceanTheme;
+
+/**
+ *
+ * @author maxwell
+ */
+public class Controle {
+
+    private static Controle instanceSingleton = null;
+    public static Principal principal = null;
+
+    private Controle() {
+
+    }
+
+    public static Controle getInstance() {
+        if (instanceSingleton == null) {
+            instanceSingleton = new Controle();
+        }
+        return instanceSingleton;
+    }
+
+    public static void inicializar() {
+        MetalLookAndFeel laf = new MetalLookAndFeel();
+        laf.setCurrentTheme(new OceanTheme());
+        
+        try {
+            UIManager.setLookAndFeel(laf);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Controle.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Não foi possível estabelecer"
+                    + "um look and fell:"+"\n"+ex.getMessage());
+            System.exit(0);
+        }
+        
+        if(principal == null){
+            principal = new Principal();
+        }
+        principal.setVisible(true);
+    }
+}
