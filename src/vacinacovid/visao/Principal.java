@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -21,12 +23,15 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import vacinacovid.Utilidades;
+import vacinacovid.daos.VacinanteDAO;
+import vacinacovid.modelo.VacinanteBean;
 
 /**
  *
  * @author maxwell
  */
-public class Principal extends JFrame{
+public class Principal extends JFrame {
 
     //Declarando objetos
     private JMenuBar menu;
@@ -36,60 +41,57 @@ public class Principal extends JFrame{
     private JScrollPane barraRolagem;
     private DefaultTableModel modelo = new DefaultTableModel();
     private JPanel pnFundo;
-    
-    
-    
+
     public Principal() {
         super("Vacinação contra Covid-19 <<Secretaria Municipal de Saúde>>");
         URL url = this.getClass().getResource("/vacinacovid/visao/favicon.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
-        setIconImage(iconeTitulo);        
+        setIconImage(iconeTitulo);
         construindoBarraDeMenu();
         construirTabela();
         construindoTela(1200, 700);
     }
-    
-    
+
     private void construindoTela(int largura, int altura) {
         Dimension tamanhoDaTela = Toolkit.getDefaultToolkit().getScreenSize();
         //posicionando tela
-        setBounds((tamanhoDaTela.width - largura)/2, (tamanhoDaTela.height - altura)/2, largura, altura);
+        setBounds((tamanhoDaTela.width - largura) / 2, (tamanhoDaTela.height - altura) / 2, largura, altura);
         //removendo decoração do OS
         setUndecorated(true);
         getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
         pnFundo = new JPanel(new BorderLayout());
-        
+
         pnFundo.add(BorderLayout.CENTER, barraRolagem);
-        
+
         getContentPane().add(pnFundo);
     }
 
-    private void construindoBarraDeMenu() {        
+    private void construindoBarraDeMenu() {
         menu = new JMenuBar();
-        setJMenuBar(menu);        
-        
+        setJMenuBar(menu);
+
         mnuCadastros = new JMenu("Menu");
         menu.add(mnuCadastros);
         mnuEntrada = new JMenuItem("Cadastrar Vacinante");
         mnuCadastros.add(mnuEntrada);
         mnuSaida = new JMenuItem("Realizar Backup");
         mnuCadastros.add(mnuSaida);
-        
+
     }
 
     private void construirTabela() {
         tabela = new JTable(modelo);
-        
+
         DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
         DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
         DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
         esquerda.setHorizontalAlignment(SwingConstants.LEFT);
         centro.setHorizontalAlignment(SwingConstants.CENTER);
         direita.setHorizontalAlignment(SwingConstants.RIGHT);
-        
+
         modelo.addColumn("ID");
         modelo.addColumn("Nome");
         modelo.addColumn("Nascmento");
@@ -101,21 +103,23 @@ public class Principal extends JFrame{
         modelo.addColumn("ESF");
         modelo.addColumn("Resp. pelo Preenchimento");
         modelo.addColumn("Cargo");
-        
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(50);
+
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(40);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(200);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(90);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(80);
         tabela.getColumnModel().getColumn(4).setPreferredWidth(300);
         tabela.getColumnModel().getColumn(5).setPreferredWidth(110);
         tabela.getColumnModel().getColumn(6).setPreferredWidth(200);
-        tabela.getColumnModel().getColumn(7).setPreferredWidth(200);
-        tabela.getColumnModel().getColumn(8).setPreferredWidth(200);
-        tabela.getColumnModel().getColumn(9).setPreferredWidth(150);
+        tabela.getColumnModel().getColumn(7).setPreferredWidth(170);
+        tabela.getColumnModel().getColumn(8).setPreferredWidth(170);
         tabela.getColumnModel().getColumn(9).setPreferredWidth(180);
         tabela.getColumnModel().getColumn(10).setPreferredWidth(100);
         
-        
+        tabela.getColumnModel().getColumn(0).setCellRenderer(direita);
+        tabela.getColumnModel().getColumn(2).setCellRenderer(centro);
+        tabela.getColumnModel().getColumn(3).setCellRenderer(centro);
+
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         barraRolagem = new JScrollPane(tabela);
         pesquisar(modelo);
@@ -123,12 +127,26 @@ public class Principal extends JFrame{
 
     private void pesquisar(DefaultTableModel modelo) {
         modelo.setNumRows(0);
-        
-        //instanciar o DAO
-        
-        //preencher a tabela com a lista
+        VacinanteDAO dao = new VacinanteDAO();
+
+        for (VacinanteBean v : dao.select()) {
+            modelo.addRow(
+                    new Object[]{
+                        v.getId()+" ",
+                        v.getNome(),
+                        v.getDtNascimento(),
+                        v.getIdade() + " anos",
+                        v.getEndereco(),
+                        Utilidades.mascara(v.getCpf(), "###.###.###-##"),
+                        v.getNomeMae(),
+                        v.getAgente().getNome(),
+                        v.getAgente().getUbs().getNome(),
+                        v.getNomeRespPreenchimento(),
+                        v.getCargoResponsavel()
+                    }
+            );
+        }
+
     }
-    
-    
 
 }

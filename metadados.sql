@@ -151,4 +151,22 @@ INSERT INTO acs(nomeacs, cdubs) VALUES ( 'GEANE RAMOS DA SILVA', 12);
 INSERT INTO acs(nomeacs, cdubs) VALUES ( 'GILBERSON PATEZ DOS SANTOS', 12);
 INSERT INTO acs(nomeacs, cdubs) VALUES ( 'JUCIARA DOS SANTOS PENHA', 12);
 
+CREATE VIEW vw_vacinantes AS(
+select 
+v.id,
+v.nome,
+v.dtnasc,
+v.idade,
+v.endereco,
+v.cpf,
+v.nomemae,
+v.cdacs,
+a.nomeacs,
+a.cdubs,
+u.nomeubs,
+v.repspreen,
+v.cargo
 
+from vacinantes v 
+inner join acs a on v.cdacs = a.id
+inner join ubs u on a.cdubs = u.id);
