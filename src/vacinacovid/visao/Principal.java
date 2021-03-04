@@ -28,8 +28,8 @@ public class Principal extends JFrame{
     
     
     public Principal() {
-        super("Controle de Almoxarifado <<Secretaria Municipal de Saúde>>");
-        URL url = this.getClass().getResource("/almoxarifado/visao/image/favicon.png");
+        super("Vacinação contra Covid-19 <<Secretaria Municipal de Saúde>>");
+        URL url = this.getClass().getResource("/vacinacovid/visao/favicon.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         setIconImage(iconeTitulo);
         construindoTela(800, 600);
