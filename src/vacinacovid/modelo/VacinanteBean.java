@@ -1,6 +1,7 @@
 package vacinacovid.modelo;
 
 import java.sql.Date;
+import vacinacovid.Utilidades;
 
 /**
  *
@@ -32,14 +33,6 @@ public class VacinanteBean {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Date getDtNascimento() {
-        return dtNascimento;
-    }
-
-    public void setDtNascimento(Date dtNascimento) {
-        this.dtNascimento = dtNascimento;
     }
 
     public Integer getIdade() {
@@ -97,6 +90,21 @@ public class VacinanteBean {
     public void setCargoResponsavel(String cargoResponsavel) {
         this.cargoResponsavel = cargoResponsavel;
     }
+
+    public Date getDtNascimento() {
+        return dtNascimento;
+    }
+
+    public void setDtNascimento(Date dtNascimento) {
+        this.dtNascimento = dtNascimento;
+    }
     
+    public String getDtNascimentoStr(){
+        return Utilidades.formataDataSTR(dtNascimento);
+    }
+    
+    public void setDtNascimentoStr(String dtNascimento){
+        this.dtNascimento = Utilidades.formataDataSQL(dtNascimento);
+    }
     
 }

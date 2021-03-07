@@ -74,6 +74,7 @@ public class VacinanteDAO extends GenericDAO{
                 VacinanteBean v = new VacinanteBean();
                 v.setId(rs.getInt("id"));
                 v.setNome(rs.getString("nome"));
+                System.out.println(rs.getDate("dtnasc"));
                 v.setDtNascimento(rs.getDate("dtnasc"));
                 v.setIdade(rs.getInt("idade"));
                 v.setEndereco(rs.getString("endereco"));

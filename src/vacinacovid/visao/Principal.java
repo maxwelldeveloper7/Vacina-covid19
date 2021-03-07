@@ -127,7 +127,7 @@ public class Principal extends JFrame {
                     new Object[]{
                         v.getId()+" ",
                         v.getNome(),
-                        v.getDtNascimento(),
+                        v.getDtNascimentoStr(),
                         v.getIdade() + " anos",
                         v.getEndereco(),
                         Utilidades.mascara(v.getCpf(), "###.###.###-##"),
