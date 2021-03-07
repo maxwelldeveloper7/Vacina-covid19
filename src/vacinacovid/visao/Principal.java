@@ -115,7 +115,7 @@ public class Principal extends JFrame {
 
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         barraRolagem = new JScrollPane(tabela);
-        //pesquisar(modelo);
+        pesquisar(modelo);
     }
 
     private void pesquisar(DefaultTableModel modelo) {
