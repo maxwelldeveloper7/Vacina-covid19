@@ -14,10 +14,12 @@ public class VacinanteBean {
     private Integer idade;
     private String endereco;
     private String cpf;
+    private String cns;
     private String nomeMae;
     private AcsBean agente;
-    private String nomeRespPreenchimento;
-    private String cargoResponsavel;
+    private Integer status;
+    private Date primeiraDose;
+    private Date segundaDose;
 
     public Integer getId() {
         return id;
@@ -75,22 +77,6 @@ public class VacinanteBean {
         this.agente = agente;
     }
 
-    public String getNomeRespPreenchimento() {
-        return nomeRespPreenchimento;
-    }
-
-    public void setNomeRespPreenchimento(String nomeRespPreenchimento) {
-        this.nomeRespPreenchimento = nomeRespPreenchimento;
-    }
-
-    public String getCargoResponsavel() {
-        return cargoResponsavel;
-    }
-
-    public void setCargoResponsavel(String cargoResponsavel) {
-        this.cargoResponsavel = cargoResponsavel;
-    }
-
     public Date getDtNascimento() {
         return dtNascimento;
     }
@@ -105,6 +91,74 @@ public class VacinanteBean {
     
     public void setDtNascimentoStr(String dtNascimento){
         this.dtNascimento = Utilidades.formataDataSQL(dtNascimento);
+    }
+
+    public String getCns() {
+        return cns;
+    }
+
+    public void setCns(String cns) {
+        this.cns = cns;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+    
+    public String status(){
+        if(this.status == 1){
+            return "Vacinado";
+        }
+        if(this.status == 2){
+            return "Recusou";
+        }
+        return "Não vacinado";
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    
+    public void setStatus(String status) {
+        if(status.equals("Não vacinado")){
+            this.status = 0;
+        }else if(status.equals("Vacinado")){
+            this.status = 1;
+        }else{
+            this.status = 2;
+        }
+    }
+
+    public Date getPrimeiraDose() {
+        return primeiraDose;
+    }
+    
+    public String primeiraDose(){
+        return Utilidades.formataDataSTR(primeiraDose);
+    }
+
+    public void setPrimeiraDose(Date primeiraDose) {
+        this.primeiraDose = primeiraDose;
+    }
+    
+    public void setPrimeiraDose(String primeira) {
+        this.primeiraDose = Utilidades.formataDataSQL(primeira);
+    }
+
+    public Date getSegundaDose() {
+        return segundaDose;
+    }
+    
+    public String segundaDose() {
+        return Utilidades.formataDataSTR(dtNascimento);
+    }
+
+    public void setSegundaDose(Date segundaDose) {
+        this.segundaDose = segundaDose;
+    }
+    
+    public void setSegundaDose(String segunda) {
+        this.segundaDose = Utilidades.formataDataSQL(segunda);
     }
     
 }
