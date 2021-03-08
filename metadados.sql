@@ -5,6 +5,7 @@ nomeubs character varying NOT NULL);
 CREATE TABLE acs(
 id serial PRIMARY KEY NOT NULL,
 nomeacs character varying NOT NULL,
+senhaacesso character varying default '123456',
 cdubs integer NOT NULL,
 CONSTRAINT fk_ubs FOREIGN KEY(cdubs)
 REFERENCES ubs(id)
