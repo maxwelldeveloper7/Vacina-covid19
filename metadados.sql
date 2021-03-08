@@ -14,14 +14,17 @@ ON UPDATE NO ACTION);
 CREATE TABLE vacinantes(
 id serial PRIMARY KEY NOT NULL,
 nome character varying,
-dtnasc DATE NOT NULL,
+dtnasc DATE,
 idade integer,
-endereco text NOT NULL,
-cpf char(11) NOT NULL,
-nomemae character varying NOT NULL,
+endereco text,
+cpf char(11) unique,
+cns char(15) unique, 
+nomemae character varying,
 cdacs integer NOT NULL,
-repspreen character varying NOT NULL,
-cargo character varying NOT NULL,
+status integer default 0,
+primeiradose date,
+segundadose date,
+
 CONSTRAINT fk_acs FOREIGN KEY(cdacs)
 REFERENCES acs(id)
 ON DELETE NO ACTION
@@ -159,13 +162,15 @@ v.dtnasc,
 v.idade,
 v.endereco,
 v.cpf,
+v.cns,
 v.nomemae,
 v.cdacs,
 a.nomeacs,
 a.cdubs,
 u.nomeubs,
-v.repspreen,
-v.cargo
+v.status,
+v.primeiradose,
+v.segundadose
 
 from vacinantes v 
 inner join acs a on v.cdacs = a.id
