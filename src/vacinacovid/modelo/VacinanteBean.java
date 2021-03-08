@@ -150,7 +150,7 @@ public class VacinanteBean {
     }
     
     public String segundaDose() {
-        return Utilidades.formataDataSTR(dtNascimento);
+        return Utilidades.formataDataSTR(segundaDose);
     }
 
     public void setSegundaDose(Date segundaDose) {

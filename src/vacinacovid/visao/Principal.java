@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +34,7 @@ public class Principal extends JFrame {
     private JTable tabela;
     private JScrollPane barraRolagem;
     private DefaultTableModel modelo = new DefaultTableModel();
+    private ListSelectionModel lms;
     private JPanel pnFundo;
 
     public Principal() {
@@ -91,11 +93,13 @@ public class Principal extends JFrame {
         modelo.addColumn("Idade");
         modelo.addColumn("Endereço");
         modelo.addColumn("CPF");
+        modelo.addColumn("Cartão SUS");
         modelo.addColumn("Mãe");
         modelo.addColumn("ACS");
         modelo.addColumn("ESF");
-        modelo.addColumn("Resp. pelo Preenchimento");
-        modelo.addColumn("Cargo");
+        modelo.addColumn("Status");
+        modelo.addColumn("1ª Dose");
+        modelo.addColumn("2ª Dose");
 
         tabela.getColumnModel().getColumn(0).setPreferredWidth(40);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(200);
@@ -103,17 +107,21 @@ public class Principal extends JFrame {
         tabela.getColumnModel().getColumn(2).setPreferredWidth(80);
         tabela.getColumnModel().getColumn(4).setPreferredWidth(300);
         tabela.getColumnModel().getColumn(5).setPreferredWidth(110);
-        tabela.getColumnModel().getColumn(6).setPreferredWidth(200);
+        tabela.getColumnModel().getColumn(6).setPreferredWidth(140);
         tabela.getColumnModel().getColumn(7).setPreferredWidth(170);
         tabela.getColumnModel().getColumn(8).setPreferredWidth(170);
-        tabela.getColumnModel().getColumn(9).setPreferredWidth(180);
-        tabela.getColumnModel().getColumn(10).setPreferredWidth(100);
+        tabela.getColumnModel().getColumn(9).setPreferredWidth(120);
+        tabela.getColumnModel().getColumn(10).setPreferredWidth(90);
         
         tabela.getColumnModel().getColumn(0).setCellRenderer(direita);
         tabela.getColumnModel().getColumn(2).setCellRenderer(centro);
         tabela.getColumnModel().getColumn(3).setCellRenderer(centro);
+        tabela.getColumnModel().getColumn(5).setCellRenderer(centro);
+        tabela.getColumnModel().getColumn(6).setCellRenderer(centro);
+        tabela.getColumnModel().getColumn(10).setCellRenderer(centro);
 
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         barraRolagem = new JScrollPane(tabela);
         pesquisar(modelo);
     }
@@ -131,7 +139,7 @@ public class Principal extends JFrame {
                         v.getIdade() + " anos",
                         v.getEndereco(),
                         Utilidades.mascara(v.getCpf(), "###.###.###-##"),
-                        v.getCns(),
+                        Utilidades.mascara(v.getCns(), "### #### #### ####"),
                         v.getNomeMae(),
                         v.getAgente().getNome(),
                         v.getAgente().getUbs().getNome(),
