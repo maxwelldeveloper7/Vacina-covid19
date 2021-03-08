@@ -6,7 +6,6 @@
 
 package vacinacovid.testes;
 
-import java.sql.Date;
 import vacinacovid.daos.VacinanteDAO;
 import vacinacovid.modelo.AcsBean;
 import vacinacovid.modelo.UbsBean;
