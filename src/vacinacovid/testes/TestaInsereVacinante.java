@@ -20,10 +20,11 @@ public class TestaInsereVacinante {
     public static void main(String args[]){
         VacinanteBean v = new VacinanteBean();
         v.setNome("Maxwell de Oliveira Chaves");
-        //v.setDtNascimento(new Date(1979-1900, 5, 25));
+        v.setDtNascimentoStr("25/05/1979");
         v.setIdade(41);
         v.setEndereco("Rua Rio Grande do Norte 635 - Vila Nova");
-        v.setCpf("04960780622");
+        v.setCpf("04960780621");
+        v.setCns("012345648912345");
         v.setNomeMae("Nelzita de Oliveira Chaves");
         AcsBean acs = new AcsBean();
         acs.setId(20);
@@ -33,8 +34,9 @@ public class TestaInsereVacinante {
         ubs.setNome("ESF Vila Nova");
         acs.setUbs(ubs);
         v.setAgente(acs);
-        v.setNomeRespPreenchimento("Joselza");
-        v.setCargoResponsavel("ACS");
+        v.setStatus("Vacinado");
+        v.setPrimeiraDose("03/02/2021");
+        v.setSegundaDose("03/05/2021");
         
         
         VacinanteDAO dao = new VacinanteDAO();

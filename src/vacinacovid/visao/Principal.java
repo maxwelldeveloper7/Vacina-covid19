@@ -131,11 +131,13 @@ public class Principal extends JFrame {
                         v.getIdade() + " anos",
                         v.getEndereco(),
                         Utilidades.mascara(v.getCpf(), "###.###.###-##"),
+                        v.getCns(),
                         v.getNomeMae(),
                         v.getAgente().getNome(),
                         v.getAgente().getUbs().getNome(),
-                        v.getNomeRespPreenchimento(),
-                        v.getCargoResponsavel()
+                        v.status(),
+                        v.primeiraDose(),
+                        v.segundaDose()
                     }
             );
         }

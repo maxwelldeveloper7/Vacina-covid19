@@ -24,9 +24,9 @@ public class VacinanteDAO extends GenericDAO{
     
     public boolean insert(VacinanteBean v){
         String sql = "INSERT INTO vacinantes(" +
-"            nome, dtnasc, idade, endereco, cpf, nomemae, cdacs, repspreen, " +
-"            cargo)" +
-"    VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+"            nome, dtnasc, idade, endereco, cpf, cns, nomemae, cdacs, status, " +
+"            primeiradose, segundadose)" +
+"    VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         return executeCommand(sql, 
                 v.getNome(),
@@ -34,16 +34,18 @@ public class VacinanteDAO extends GenericDAO{
                 v.getIdade(),
                 v.getEndereco(),
                 v.getCpf(),
+                v.getCns(),
                 v.getNomeMae(),
                 v.getAgente().getId(),
-                v.getNomeRespPreenchimento(),
-                v.getCargoResponsavel());
+                v.getStatus(),
+                v.getPrimeiraDose(),
+                v.getSegundaDose());
     }
     
     public boolean update(VacinanteBean v) {
         String sql = "UPDATE vacinantes " +
-"   SET nome=?, dtnasc=?, idade=?, endereco=?, cpf=?, nomemae=?," +
-"       cdacs=?, repspreen=?, cargo=?" +
+"   SET nome=?, dtnasc=?, idade=?, endereco=?, cpf=?, cns=?, nomemae=?," +
+"       cdacs=?, status = ?, primeiradose = ?, segundadose = ? " +
 " WHERE id = ?";
         return executeCommand(sql,  
                 v.getNome(),
@@ -51,10 +53,12 @@ public class VacinanteDAO extends GenericDAO{
                 v.getIdade(),
                 v.getEndereco(),
                 v.getCpf(),
+                v.getCns(),
                 v.getNomeMae(),
                 v.getAgente().getId(),
-                v.getNomeRespPreenchimento(),
-                v.getCargoResponsavel(),
+                v.getStatus(),
+                v.getPrimeiraDose(),
+                v.getSegundaDose(),
                 v.getId());
     }
 
@@ -79,6 +83,7 @@ public class VacinanteDAO extends GenericDAO{
                 v.setIdade(rs.getInt("idade"));
                 v.setEndereco(rs.getString("endereco"));
                 v.setCpf(rs.getString("cpf"));
+                v.setCns(rs.getString("cns"));
                 v.setNomeMae(rs.getString("nomemae"));
                 AcsBean acs = new AcsBean();
                 acs.setId(rs.getInt("cdacs"));
@@ -88,8 +93,9 @@ public class VacinanteDAO extends GenericDAO{
                 ubs.setNome(rs.getString("nomeubs"));
                 acs.setUbs(ubs);
                 v.setAgente(acs);
-                v.setNomeRespPreenchimento(rs.getString("repspreen"));
-                v.setCargoResponsavel(rs.getString("cargo"));                
+                v.setStatus(rs.getInt("status"));
+                v.setPrimeiraDose(rs.getDate("primeiradose"));
+                v.setSegundaDose(rs.getDate("segundadose"));
                 vacinantes.add(v);
             }
         } catch (SQLException ex) {
