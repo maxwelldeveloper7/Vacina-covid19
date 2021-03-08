@@ -47,4 +47,8 @@ public class Controle {
         }
         principal.setVisible(true);
     }
+    
+    public static void tratarErroSQL(String mensagem){
+        System.out.println("IMPLEMENTAR TRATAMENTO DE ERRO - personalizar tela de mensagem para o usuário");
+    }
 }

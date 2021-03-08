@@ -22,8 +22,8 @@ public class TestaInsereVacinante {
         v.setDtNascimentoStr("25/05/1979");
         v.setIdade(41);
         v.setEndereco("Rua Rio Grande do Norte 635 - Vila Nova");
-        v.setCpf("04960780621");
-        v.setCns("012345648912345");
+        v.setCpf("04960781621");
+        v.setCns("012345648912335");
         v.setNomeMae("Nelzita de Oliveira Chaves");
         AcsBean acs = new AcsBean();
         acs.setId(20);

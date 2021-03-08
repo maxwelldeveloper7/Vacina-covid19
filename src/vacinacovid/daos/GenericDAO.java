@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import vacinacovid.controle.Controle;
 
 /**
  *
@@ -71,12 +72,10 @@ public abstract class GenericDAO {
             ConexaoPostgres.rollback();
             System.out.println("Falha ao executar DML (Linguagem de Manipulação de Dados)."+ ex.getErrorCode());
             Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);
-
-            if(ex.getErrorCode()==0){
-                System.out.println(ex.getErrorCode());
-                JOptionPane.showMessageDialog(null,ex.getMessage(),"Falha ao executar DML",JOptionPane.WARNING_MESSAGE);
-            }
+            System.out.println(ex.getSQLState());
+            Controle.tratarErroSQL(ex.getMessage());            
             return false;
+            
         } finally {
             fecharPrepareStatement();
         }
