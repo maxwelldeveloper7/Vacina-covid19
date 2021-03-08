@@ -14,6 +14,7 @@ public class AcsBean {
     private Integer id;
     private String nome;
     private UbsBean ubs;
+    private String senha;
 
     public Integer getId() {
         return id;
@@ -38,6 +39,12 @@ public class AcsBean {
     public void setUbs(UbsBean ubs) {
         this.ubs = ubs;
     }
-    
-    
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }    
 }
