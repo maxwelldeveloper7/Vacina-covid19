@@ -3,6 +3,7 @@ package vacinacovid.controle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
@@ -45,7 +46,7 @@ public class Controle {
         }
         
         if(selecionaUbs == null){
-            selecionaUbs = new FrmSelecionaUbs(null, false, "Selecione seu ESF", 400, 150);            
+            selecionaUbs = new FrmSelecionaUbs(null, false, "Selecione sua Área", 350, 160, JRootPane.QUESTION_DIALOG);            
         }
         selecionaUbs.setVisible(true);
         

@@ -16,10 +16,11 @@ public abstract class GenericJDialog extends JDialog implements ActionListener{
     
     public JPanel pnFundo;
     public JPanel pnBotoes;
+    public JPanel pnDados;
     
     
     public GenericJDialog(JFrame parent, boolean modal, String titulo,
-            int largura, int altura){
+            int largura, int altura, int decorationStyle){
         setTitle(titulo);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width - largura)/2, (screenSize.height - altura)/2,
@@ -27,7 +28,7 @@ public abstract class GenericJDialog extends JDialog implements ActionListener{
         
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setUndecorated(true);
-        getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
+        getRootPane().setWindowDecorationStyle(decorationStyle);        
         setResizable(false);
     }
 }

@@ -123,6 +123,7 @@ public class Principal extends JFrame {
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         barraRolagem = new JScrollPane(tabela);
+        
     }
 
     public void pesquisar(DefaultTableModel modelo) {
