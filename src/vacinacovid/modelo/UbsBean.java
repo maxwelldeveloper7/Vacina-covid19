@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package vacinacovid.modelo;
 
 /**
@@ -14,6 +8,14 @@ public class UbsBean {
     private Integer id;
     private String nome;
 
+    public UbsBean() {
+    }
+
+    public UbsBean(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }    
+    
     public Integer getId() {
         return id;
     }

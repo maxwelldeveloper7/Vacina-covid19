@@ -53,7 +53,8 @@ public class FrmSelecionaUbs extends GenericJDialog{
     }
     
     private void carregarEsf() {
-        List<UbsBean> unidades = new ArrayList();        
+        List<UbsBean> unidades = new ArrayList();
+        UbsBean reta = new UbsBean();
     }
     
     private void definirLayout(){
