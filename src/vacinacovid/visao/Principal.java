@@ -37,7 +37,7 @@ public class Principal extends JFrame {
     private ListSelectionModel lms;
     private JPanel pnFundo;
 
-    public Principal() {
+    public Principal(int modoAcesso, String esf) {
         super("Vacinação contra Covid-19 <<Secretaria Municipal de Saúde>>");
         URL url = this.getClass().getResource("/vacinacovid/visao/favicon.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
@@ -123,6 +123,7 @@ public class Principal extends JFrame {
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         barraRolagem = new JScrollPane(tabela);
+        
         
     }
 

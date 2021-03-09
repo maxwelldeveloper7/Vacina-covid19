@@ -31,6 +31,13 @@ public class Controle {
         }
         return instanceSingleton;
     }
+    
+    public static void abrirTelaPrincipal(int modoAcesso, String esf){
+        if(principal == null){
+            principal = new Principal(modoAcesso, esf);
+        }
+        principal.setVisible(true);
+    }
 
     public static void inicializar() {
         MetalLookAndFeel laf = new MetalLookAndFeel();

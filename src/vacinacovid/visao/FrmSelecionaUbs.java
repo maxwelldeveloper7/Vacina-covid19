@@ -6,24 +6,24 @@
 
 package vacinacovid.visao;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import vacinacovid.modelo.UbsBean;
+import javax.swing.JPasswordField;
+import vacinacovid.controle.Controle;
 
 /**
  *
  * @author maxwell
  */
-public class FrmSelecionaUbs extends GenericJDialog{
+public class FrmSelecionaUbs extends GenericJDialog implements ActionListener{
 
     private JLabel lbEsf;
     private JComboBox cbEsf;
@@ -39,6 +39,7 @@ public class FrmSelecionaUbs extends GenericJDialog{
     private void ConstruirTela() {
         inicializarComponentesDaTela();
         definirLayout();
+        registrarEventos();
     }
     
     private void inicializarComponentesDaTela() {
@@ -47,14 +48,25 @@ public class FrmSelecionaUbs extends GenericJDialog{
         
         cbEsf = new JComboBox();
         cbEsf.setBounds(20, 40, 300, 20);
+        carregarEsf();
         
-        btProsseguir = new JButton ("Prosseguir");
-        
+        btProsseguir = new JButton ("Prosseguir");        
     }
     
     private void carregarEsf() {
-        List<UbsBean> unidades = new ArrayList();
-        UbsBean reta = new UbsBean();
+        cbEsf.addItem("Selecione");
+        cbEsf.addItem("RETA");
+        cbEsf.addItem("GETÚLIO VARGAS");
+        cbEsf.addItem("VILA NOVA");
+        cbEsf.addItem("VILA ESPERANÇA");
+        cbEsf.addItem("LATICÍNIOS");
+        cbEsf.addItem("UDR");
+        cbEsf.addItem("CRUZEIRO");
+        cbEsf.addItem("SETE DE SETEMBRO");
+        cbEsf.addItem("VALDIVINA FERRAZ 1");
+        cbEsf.addItem("VALDIVINA FERRAZ 2");
+        cbEsf.addItem("VILA GABRIEL PASSOS");
+        cbEsf.addItem("VILA PEREIRA");
     }
     
     private void definirLayout(){
@@ -69,14 +81,39 @@ public class FrmSelecionaUbs extends GenericJDialog{
         pnFundo.setBackground(Color.white);
         getContentPane().add(pnFundo);
     }
-       
+    
+    private void registrarEventos(){
+        btProsseguir.addActionListener(this);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(e.getSource() == btProsseguir){
+            validarModoDeAcesso();
+        }
     }
 
-    
-
-    
+    private void validarModoDeAcesso() {
+        if(cbEsf.getSelectedItem().toString().equals("Selecione")){
+            JPasswordField psw = new JPasswordField(10);
+            psw.setEchoChar('*');
+            JLabel rotulo = new JLabel("Entre com a senha:");
+            JPanel entUsuario = new JPanel();
+            entUsuario.add(rotulo);
+            entUsuario.add(psw);
+            psw.requestFocus();
+            JOptionPane.showMessageDialog(null, entUsuario, "Acesso Restrito", JOptionPane.PLAIN_MESSAGE);            
+            String senha = psw.getText();
+            System.out.println(senha);
+            
+            if(senha.equals("311208")){
+                Controle.abrirTelaPrincipal(1,"Todas");
+            }else{
+                JOptionPane.showMessageDialog(this, "Senha Inválida");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Implementar tela de selecionar agentes");
+        }
+    }
 }
