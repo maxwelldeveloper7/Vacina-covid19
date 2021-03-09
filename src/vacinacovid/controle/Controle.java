@@ -7,6 +7,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
+import vacinacovid.visao.FrmSelecionaUbs;
 import vacinacovid.visao.Principal;
 
 /**
@@ -17,6 +18,7 @@ public class Controle {
 
     private static Controle instanceSingleton = null;
     public static Principal principal = null;
+    public static FrmSelecionaUbs selecionaUbs = null;
 
     private Controle() {
 
@@ -42,10 +44,15 @@ public class Controle {
             System.exit(0);
         }
         
-        if(principal == null){
+        if(selecionaUbs == null){
+            selecionaUbs = new FrmSelecionaUbs(null, false, "Selecione seu ESF", 400, 150);            
+        }
+        selecionaUbs.setVisible(true);
+        
+        /*if(principal == null){
             principal = new Principal();
         }
-        principal.setVisible(true);
+        principal.setVisible(true);*/
     }
     
     public static void tratarErroSQL(String mensagem){

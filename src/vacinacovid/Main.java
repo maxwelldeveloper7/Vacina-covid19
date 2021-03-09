@@ -1,6 +1,7 @@
 package vacinacovid;
 
 import vacinacovid.controle.Controle;
+import vacinacovid.visao.FrmSelecionaUbs;
 
 /**
  *
