@@ -1,6 +1,7 @@
 package vacinacovid.visao;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -35,7 +36,7 @@ public class Principal extends JFrame {
     private JScrollPane barraRolagem;
     private DefaultTableModel modelo = new DefaultTableModel();
     private ListSelectionModel lms;
-    private JPanel pnFundo;
+    private JPanel pnFundo, pnFundoFiltros;
 
     public Principal(String esf) {
         super("Vacinação contra Covid-19 <<Secretaria Municipal de Saúde>>");
@@ -57,9 +58,14 @@ public class Principal extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        pnFundo = new JPanel(new BorderLayout());
-
-        pnFundo.add(BorderLayout.CENTER, barraRolagem);
+        pnFundo = new JPanel(null);
+        pnFundoFiltros = new JPanel(null);
+        
+        barraRolagem.setBounds(2, 100, 1353, 480);
+        pnFundoFiltros.setBackground(Color.red);
+        
+        pnFundo.add(pnFundoFiltros);
+        pnFundo.add(barraRolagem);
 
         getContentPane().add(pnFundo);
     }
