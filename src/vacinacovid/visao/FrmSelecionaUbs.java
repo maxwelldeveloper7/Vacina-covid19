@@ -56,10 +56,10 @@ public class FrmSelecionaUbs extends GenericJDialog implements ActionListener{
     private void carregarEsf() {
         cbEsf.addItem("Selecione");
         cbEsf.addItem("RETA");
-        cbEsf.addItem("GETÚLIO VARGAS");
+        cbEsf.addItem("GETULIO VARGAS");
         cbEsf.addItem("VILA NOVA");
         cbEsf.addItem("VILA ESPERANÇA");
-        cbEsf.addItem("LATICÍNIOS");
+        cbEsf.addItem("LATICINIOS");
         cbEsf.addItem("UDR");
         cbEsf.addItem("CRUZEIRO");
         cbEsf.addItem("SETE DE SETEMBRO");
@@ -113,7 +113,8 @@ public class FrmSelecionaUbs extends GenericJDialog implements ActionListener{
             }
             
         }else{
-            JOptionPane.showMessageDialog(null, "Implementar tela de selecionar agentes");
+            Controle.unidadeSelecionada = "ESF "+cbEsf.getSelectedItem().toString();
+            System.out.println(Controle.unidadeSelecionada);
         }
     }
 }

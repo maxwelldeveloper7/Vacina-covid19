@@ -20,16 +20,16 @@ public class TestaInsereVacinante {
         VacinanteBean v = new VacinanteBean();
         v.setNome("Maxwell de Oliveira Chaves");
         v.setDtNascimentoStr("25/05/1979");
-        v.setIdade(41);
+        v.setIdade(44);
         v.setEndereco("Rua Rio Grande do Norte 635 - Vila Nova");
         v.setCpf("04960781621");
         v.setCns("012345648912335");
         v.setNomeMae("Nelzita de Oliveira Chaves");
         AcsBean acs = new AcsBean();
-        acs.setId(20);
+        acs.setId(2);
         acs.setNome("Joelza Silva Oliveira");
         UbsBean ubs = new UbsBean();
-        ubs.setId(3);
+        ubs.setId(1);
         ubs.setNome("ESF Vila Nova");
         acs.setUbs(ubs);
         v.setAgente(acs);
@@ -39,6 +39,11 @@ public class TestaInsereVacinante {
         
         
         VacinanteDAO dao = new VacinanteDAO();
-        dao.insert(v);
+        for (int i = 500; i < 550; i++) {
+            v.setCpf(Integer.toString(i));
+            v.setCns(Integer.toString(i));
+            dao.insert(v);
+        }
+        
     }
 }

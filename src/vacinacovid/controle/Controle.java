@@ -18,6 +18,7 @@ import vacinacovid.visao.Principal;
 public class Controle {
 
     private static Controle instanceSingleton = null;
+    public static String unidadeSelecionada;
     public static Principal principal = null;
     public static FrmSelecionaUbs selecionaUbs = null;
 

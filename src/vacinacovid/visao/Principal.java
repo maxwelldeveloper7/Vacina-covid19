@@ -112,7 +112,7 @@ public class Principal extends JFrame {
         tabela.getColumnModel().getColumn(8).setPreferredWidth(170);
         tabela.getColumnModel().getColumn(9).setPreferredWidth(120);
         tabela.getColumnModel().getColumn(10).setPreferredWidth(90);
-        
+
         tabela.getColumnModel().getColumn(0).setCellRenderer(direita);
         tabela.getColumnModel().getColumn(2).setCellRenderer(centro);
         tabela.getColumnModel().getColumn(3).setCellRenderer(centro);
@@ -123,7 +123,6 @@ public class Principal extends JFrame {
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         barraRolagem = new JScrollPane(tabela);
-        
         pesquisar(modelo);
     }
 
@@ -131,10 +130,10 @@ public class Principal extends JFrame {
         modelo.setNumRows(0);
         VacinanteDAO dao = new VacinanteDAO();
 
-        for (VacinanteBean v : dao.select()) {
+        for (VacinanteBean v : dao.select()) {            
             modelo.addRow(
                     new Object[]{
-                        v.getId()+" ",
+                        v.getId() + " ",
                         v.getNome(),
                         v.getDtNascimentoStr(),
                         v.getIdade() + " anos",

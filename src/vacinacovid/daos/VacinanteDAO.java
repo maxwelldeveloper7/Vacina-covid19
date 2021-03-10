@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vacinacovid.daos;
 
 import java.sql.ResultSet;
@@ -20,15 +19,15 @@ import vacinacovid.modelo.VacinanteBean;
  *
  * @author maxwell
  */
-public class VacinanteDAO extends GenericDAO{
-    
-    public boolean insert(VacinanteBean v){
-        String sql = "INSERT INTO vacinantes(" +
-"            nome, dtnasc, idade, endereco, cpf, cns, nomemae, cdacs, status, " +
-"            primeiradose, segundadose)" +
-"    VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        return executeCommand(sql, 
+public class VacinanteDAO extends GenericDAO {
+
+    public boolean insert(VacinanteBean v) {
+        String sql = "INSERT INTO vacinantes("
+                + "            nome, dtnasc, idade, endereco, cpf, cns, nomemae, cdacs, status, "
+                + "            primeiradose, segundadose)"
+                + "    VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        return executeCommand(sql,
                 v.getNome(),
                 v.getDtNascimento(),
                 v.getIdade(),
@@ -41,13 +40,13 @@ public class VacinanteDAO extends GenericDAO{
                 v.getPrimeiraDose(),
                 v.getSegundaDose());
     }
-    
+
     public boolean update(VacinanteBean v) {
-        String sql = "UPDATE vacinantes " +
-"   SET nome=?, dtnasc=?, idade=?, endereco=?, cpf=?, cns=?, nomemae=?," +
-"       cdacs=?, status = ?, primeiradose = ?, segundadose = ? " +
-" WHERE id = ?";
-        return executeCommand(sql,  
+        String sql = "UPDATE vacinantes "
+                + "   SET nome=?, dtnasc=?, idade=?, endereco=?, cpf=?, cns=?, nomemae=?,"
+                + "       cdacs=?, status = ?, primeiradose = ?, segundadose = ? "
+                + " WHERE id = ?";
+        return executeCommand(sql,
                 v.getNome(),
                 v.getDtNascimento(),
                 v.getIdade(),
@@ -78,7 +77,6 @@ public class VacinanteDAO extends GenericDAO{
                 VacinanteBean v = new VacinanteBean();
                 v.setId(rs.getInt("id"));
                 v.setNome(rs.getString("nome"));
-                System.out.println(rs.getDate("dtnasc"));
                 v.setDtNascimento(rs.getDate("dtnasc"));
                 v.setIdade(rs.getInt("idade"));
                 v.setEndereco(rs.getString("endereco"));
@@ -126,7 +124,7 @@ public class VacinanteDAO extends GenericDAO{
             while (rs.next()) {
                 u = new VacinanteBean();
                 u.setId(rs.getInt("id"));
-               // u.setSetor(rs.getString("setor"));
+                // u.setSetor(rs.getString("setor"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(VacinanteDAO.class.getName()).log(Level.SEVERE, null, ex);
