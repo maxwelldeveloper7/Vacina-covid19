@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vacinacovid.visao;
 
 import java.awt.Color;
@@ -23,36 +22,34 @@ import vacinacovid.controle.Controle;
  *
  * @author maxwell
  */
-public class FrmSelecionaUbs extends GenericJDialog implements ActionListener{
+public class FrmSelecionaUbs extends GenericJDialog implements ActionListener {
 
     private JLabel lbEsf;
     private JComboBox cbEsf;
     private JButton btProsseguir;
-    
+
     public FrmSelecionaUbs(JFrame parent, boolean modal, String titulo, int largura, int altura, int decorationStyle) {
         super(parent, modal, titulo, largura, altura, decorationStyle);
         ConstruirTela();
     }
-    
-    
 
     private void ConstruirTela() {
         inicializarComponentesDaTela();
         definirLayout();
         registrarEventos();
     }
-    
+
     private void inicializarComponentesDaTela() {
         lbEsf = new JLabel("ESF:");
         lbEsf.setBounds(20, 20, 100, 20);
-        
+
         cbEsf = new JComboBox();
         cbEsf.setBounds(20, 40, 300, 20);
         carregarEsf();
-        
-        btProsseguir = new JButton ("Prosseguir");        
+
+        btProsseguir = new JButton("Prosseguir");
     }
-    
+
     private void carregarEsf() {
         cbEsf.addItem("Selecione");
         cbEsf.addItem("RETA");
@@ -68,8 +65,8 @@ public class FrmSelecionaUbs extends GenericJDialog implements ActionListener{
         cbEsf.addItem("VILA GABRIEL PASSOS");
         cbEsf.addItem("VILA PEREIRA");
     }
-    
-    private void definirLayout(){
+
+    private void definirLayout() {
         pnFundo = new JPanel(null);
         pnFundo.add(lbEsf);
         pnFundo.add(cbEsf);
@@ -81,20 +78,20 @@ public class FrmSelecionaUbs extends GenericJDialog implements ActionListener{
         pnFundo.setBackground(Color.white);
         getContentPane().add(pnFundo);
     }
-    
-    private void registrarEventos(){
+
+    private void registrarEventos() {
         btProsseguir.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == btProsseguir){
+        if (e.getSource() == btProsseguir) {
             validarModoDeAcesso();
         }
     }
 
     private void validarModoDeAcesso() {
-        if(cbEsf.getSelectedItem().toString().equals("Selecione")){
+        if (cbEsf.getSelectedItem().toString().equals("Selecione")) {
             JPasswordField psw = new JPasswordField(10);
             psw.setEchoChar('*');
             JLabel rotulo = new JLabel("Entre com a senha:");
@@ -102,19 +99,20 @@ public class FrmSelecionaUbs extends GenericJDialog implements ActionListener{
             entUsuario.add(rotulo);
             entUsuario.add(psw);
             psw.requestFocus();
-            JOptionPane.showMessageDialog(null, entUsuario, "Acesso Restrito", JOptionPane.PLAIN_MESSAGE);            
+            JOptionPane.showMessageDialog(null, entUsuario, "Acesso Restrito", JOptionPane.PLAIN_MESSAGE);
             String senha = psw.getText();
             System.out.println(senha);
-            
-            if(senha.equals("311208")){
-                Controle.abrirTelaPrincipal(1,"Todas");
-            }else{
+
+            if (senha.equals("311208")) {
+                Controle.abrirTelaPrincipal("Todas");
+                dispose();
+            } else {
                 JOptionPane.showMessageDialog(this, "Senha Inválida");
             }
-            
-        }else{
-            Controle.unidadeSelecionada = "ESF "+cbEsf.getSelectedItem().toString();
-            System.out.println(Controle.unidadeSelecionada);
+
+        } else {
+            Controle.abrirTelaPrincipal(cbEsf.getSelectedItem().toString());
+            dispose();
         }
     }
 }

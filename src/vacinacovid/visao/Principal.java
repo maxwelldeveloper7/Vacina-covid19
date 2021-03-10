@@ -37,13 +37,13 @@ public class Principal extends JFrame {
     private ListSelectionModel lms;
     private JPanel pnFundo;
 
-    public Principal(int modoAcesso, String esf) {
+    public Principal(String esf) {
         super("Vacinação contra Covid-19 <<Secretaria Municipal de Saúde>>");
         URL url = this.getClass().getResource("/vacinacovid/visao/favicon.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         setIconImage(iconeTitulo);
         construindoBarraDeMenu();
-        construirTabela();
+        construirTabela(esf);
         construindoTela(1366, 768);
     }
 
@@ -77,7 +77,7 @@ public class Principal extends JFrame {
 
     }
 
-    private void construirTabela() {
+    private void construirTabela(String esf) {
         tabela = new JTable(modelo);
 
         DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
@@ -123,31 +123,53 @@ public class Principal extends JFrame {
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         barraRolagem = new JScrollPane(tabela);
-        pesquisar(modelo);
+        pesquisar(modelo, esf);
     }
 
-    public void pesquisar(DefaultTableModel modelo) {
+    public void pesquisar(DefaultTableModel modelo, String esf) {
         modelo.setNumRows(0);
         VacinanteDAO dao = new VacinanteDAO();
 
-        for (VacinanteBean v : dao.select()) {            
-            modelo.addRow(
-                    new Object[]{
-                        v.getId() + " ",
-                        v.getNome(),
-                        v.getDtNascimentoStr(),
-                        v.getIdade() + " anos",
-                        v.getEndereco(),
-                        Utilidades.mascara(v.getCpf(), "###.###.###-##"),
-                        Utilidades.mascara(v.getCns(), "### #### #### ####"),
-                        v.getNomeMae(),
-                        v.getAgente().getNome(),
-                        v.getAgente().getUbs().getNome(),
-                        v.status(),
-                        v.primeiraDose(),
-                        v.segundaDose()
-                    }
-            );
+        if (esf.equals("Todas")) {
+            for (VacinanteBean v : dao.select()) {
+                modelo.addRow(
+                        new Object[]{
+                            v.getId() + " ",
+                            v.getNome(),
+                            v.getDtNascimentoStr(),
+                            v.getIdade() + " anos",
+                            v.getEndereco(),
+                            Utilidades.mascara(v.getCpf(), "###.###.###-##"),
+                            Utilidades.mascara(v.getCns(), "### #### #### ####"),
+                            v.getNomeMae(),
+                            v.getAgente().getNome(),
+                            v.getAgente().getUbs().getNome(),
+                            v.status(),
+                            v.primeiraDose(),
+                            v.segundaDose()
+                        }
+                );
+            }
+        } else {
+            for (VacinanteBean v : dao.select("ESF "+esf)) {
+                modelo.addRow(
+                        new Object[]{
+                            v.getId() + " ",
+                            v.getNome(),
+                            v.getDtNascimentoStr(),
+                            v.getIdade() + " anos",
+                            v.getEndereco(),
+                            Utilidades.mascara(v.getCpf(), "###.###.###-##"),
+                            Utilidades.mascara(v.getCns(), "### #### #### ####"),
+                            v.getNomeMae(),
+                            v.getAgente().getNome(),
+                            v.getAgente().getUbs().getNome(),
+                            v.status(),
+                            v.primeiraDose(),
+                            v.segundaDose()
+                        }
+                );
+            }
         }
 
     }

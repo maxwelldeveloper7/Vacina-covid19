@@ -18,7 +18,6 @@ import vacinacovid.visao.Principal;
 public class Controle {
 
     private static Controle instanceSingleton = null;
-    public static String unidadeSelecionada;
     public static Principal principal = null;
     public static FrmSelecionaUbs selecionaUbs = null;
 
@@ -33,12 +32,14 @@ public class Controle {
         return instanceSingleton;
     }
     
-    public static void abrirTelaPrincipal(int modoAcesso, String esf){
+    public static void abrirTelaPrincipal(String esf){
         if(principal == null){
-            principal = new Principal(modoAcesso, esf);
+            principal = new Principal(esf);
         }
         principal.setVisible(true);
     }
+    
+    
 
     public static void inicializar() {
         MetalLookAndFeel laf = new MetalLookAndFeel();
@@ -57,11 +58,6 @@ public class Controle {
             selecionaUbs = new FrmSelecionaUbs(null, false, "Selecione sua Área", 350, 160, JRootPane.QUESTION_DIALOG);            
         }
         selecionaUbs.setVisible(true);
-        
-        /*if(principal == null){
-            principal = new Principal();
-        }
-        principal.setVisible(true);*/
     }
     
     public static void tratarErroSQL(String mensagem){
