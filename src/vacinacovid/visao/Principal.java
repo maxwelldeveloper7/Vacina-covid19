@@ -124,7 +124,7 @@ public class Principal extends JFrame {
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         barraRolagem = new JScrollPane(tabela);
         
-        
+        pesquisar(modelo);
     }
 
     public void pesquisar(DefaultTableModel modelo) {
