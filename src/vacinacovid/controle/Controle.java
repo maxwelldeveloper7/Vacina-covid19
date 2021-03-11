@@ -53,11 +53,13 @@ public class Controle {
                     + "um look and fell:"+"\n"+ex.getMessage());
             System.exit(0);
         }
-        
+        /*
         if(selecionaUbs == null){
             selecionaUbs = new FrmSelecionaUbs(null, false, "Selecione sua Área", 350, 160, JRootPane.QUESTION_DIALOG);            
         }
         selecionaUbs.setVisible(true);
+        */
+        abrirTelaPrincipal("Todos");
     }
     
     public static void tratarErroSQL(String mensagem){

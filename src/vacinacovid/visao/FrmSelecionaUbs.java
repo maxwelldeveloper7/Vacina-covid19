@@ -51,7 +51,7 @@ public class FrmSelecionaUbs extends GenericJDialog implements ActionListener {
     }
 
     private void carregarEsf() {
-        cbEsf.addItem("Selecione");
+        cbEsf.addItem("Todos");
         cbEsf.addItem("RETA");
         cbEsf.addItem("GETULIO VARGAS");
         cbEsf.addItem("VILA NOVA");
@@ -91,7 +91,7 @@ public class FrmSelecionaUbs extends GenericJDialog implements ActionListener {
     }
 
     private void validarModoDeAcesso() {
-        if (cbEsf.getSelectedItem().toString().equals("Selecione")) {
+        if (cbEsf.getSelectedItem().toString().equals("Todos")) {
             JPasswordField psw = new JPasswordField(10);
             psw.setEchoChar('*');
             JLabel rotulo = new JLabel("Entre com a senha:");
@@ -104,7 +104,7 @@ public class FrmSelecionaUbs extends GenericJDialog implements ActionListener {
             System.out.println(senha);
 
             if (senha.equals("311208")) {
-                Controle.abrirTelaPrincipal("Todas");
+                Controle.abrirTelaPrincipal("Todos");
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Senha Inválida");
