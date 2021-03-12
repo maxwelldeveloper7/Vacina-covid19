@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -22,6 +23,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import vacinacovid.Utilidades;
@@ -42,17 +44,18 @@ public class Principal extends JFrame {
     private JScrollPane barraRolagem;
     private DefaultTableModel modelo = new DefaultTableModel();
     private ListSelectionModel lms;
-    private JPanel pnFundo, pnFiltros, pnFaixaEtaria, pnStatus, pnBuscaRapida, pnLab;
-    private JLabel lbEsf, lbAcs, lbTraco;
+    private JPanel pnFundo, pnFiltros, pnFaixaEtaria, pnStatus, pnBuscaRapida, pnLab, pnBotoes, pnRodaPe;
+    private JLabel lbEsf, lbAcs, lbTraco, lbTotal, lbRegistros, lbLogo;
     private JComboBox cbEsf, cbAcs, cbFaixaEtaria1, cbFaixaEtaria2;
-    private TitledBorder bordaFiltro, bordaFaixaEtaria, bordaStatus, bordaBuscaDetalhada, bordaLab;
+    private TitledBorder bordaFiltro, bordaFaixaEtaria, bordaStatus, bordaBuscaDetalhada, bordaLab, bordaBotoes, bordaRodaPe;
     private JCheckBox chVacinado, chNaoVacinado, chRecusou, chAstrazeneca, chButantan, chPfizer;
-    private JButton btNome, btCpf, btCns;
+    private JButton btNome, btCpf, btCns, btInserir, btEditar, btExcluir, btGerarRelatorio;
+    private ImageIcon logo, add, edit, delete, report, pessoa;
     
 
     public Principal(String esf) {
         super("Vacinação contra Covid-19 <<Secretaria Municipal de Saúde>>");
-        URL url = this.getClass().getResource("/vacinacovid/visao/favicon.png");
+        URL url = this.getClass().getResource("/vacinacovid/visao/vacina.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         setIconImage(iconeTitulo);
         construindoBarraDeMenu();
@@ -166,34 +169,83 @@ public class Principal extends JFrame {
         pnBuscaRapida = new JPanel(null);
         
         pnBuscaRapida.setBackground(Color.white);
-        pnBuscaRapida.setBounds(853, 3, 430, 120);
-        bordaBuscaDetalhada = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Busca Rápida:");
+        pnBuscaRapida.setBounds(853, 3, 131, 120);
+        bordaBuscaDetalhada = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Busca Rápida");
         pnBuscaRapida.setBorder(bordaBuscaDetalhada);
-        btNome = new JButton("Nome", null);
-        btNome.setBounds(10, 20, 100, 25);
+        pessoa = new ImageIcon(this.getClass().getResource("pessoa.png"));
+        btNome = new JButton("Nome", pessoa);
+        btNome.setBounds(15, 20, 100, 25);
         btCpf = new JButton("CPF", null);
-        btCpf.setBounds(10, 50, 100, 25);
+        btCpf.setBounds(15, 50, 100, 25);
         btCns = new JButton("CNS", null);
-        btCns.setBounds(10, 80, 100, 25);
+        btCns.setBounds(15, 80, 100, 25);
         
         pnBuscaRapida.add(btNome);
         pnBuscaRapida.add(btCpf);
         pnBuscaRapida.add(btCns);
         
         
-        //adicionando barra de rolagem
-        barraRolagem.setBounds(7, 128, 1343, 480);
+        //Painel de botões
+        pnBotoes = new JPanel(null);
         
-        pnFundo.add(pnBuscaRapida);
+        pnBotoes.setBackground(Color.white);
+        pnBotoes.setBounds( 988, 3, 131, 120);
+        bordaBotoes = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Cadastros");
+        pnBotoes.setBorder(bordaBotoes);
+        add = new ImageIcon(this.getClass().getResource("file-new-16x16.png"));
+        btInserir = new JButton("Inserir", add);
+        btInserir.setBounds(15, 20, 100, 25);
+        edit = new ImageIcon(this.getClass().getResource("edit-16x16.png"));
+        btEditar = new JButton("Editar", edit);
+        btEditar.setBounds(15, 50, 100, 25);
+        delete = new ImageIcon(this.getClass().getResource("edit-delete-16x16.png"));
+        btExcluir = new JButton("Excluir", delete);
+        btExcluir.setBounds(15, 80, 100, 25);
+        
+        pnBotoes.add(btInserir);
+        pnBotoes.add(btEditar);
+        pnBotoes.add(btExcluir);
+        
+        logo = new ImageIcon(this.getClass().getResource("Nanuque-logo.jpeg"));
+        lbLogo = new JLabel(logo);
+        lbLogo.setBounds(1130, 9, 210, 110);
+        
+        //adicionando barra de rolagem
+        barraRolagem.setBounds(7, 128, 1343, 550);
+        
+        pnRodaPe = new JPanel(null);
+        pnRodaPe.setBackground(Color.white);
+        pnRodaPe.setBounds(6, 682, 1344, 50);
+        bordaRodaPe = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+        pnRodaPe.setBorder(bordaRodaPe);
+        
+        lbTotal = new JLabel("Total de Pessoas:");
+        lbTotal.setBounds(20, 20, 135, 20);
+        
+        lbRegistros = new JLabel("0");
+        lbRegistros.setBounds(150, 20, 200, 20);
+        
+        report = new ImageIcon(this.getClass().getResource("report.png"));
+        btGerarRelatorio = new JButton("Gerar Relatório",report);
+        btGerarRelatorio.setBounds(1170, 10, 163, 30);
+        pnRodaPe.add(lbTotal);
+        pnRodaPe.add(lbRegistros);
+        pnRodaPe.add(btGerarRelatorio);
+        
+        
         pnFundo.add(pnFiltros);
+        pnFundo.add(pnBuscaRapida);
+        pnFundo.add(pnBotoes);
+        pnFundo.add(lbLogo);
         pnFundo.add(barraRolagem);
+        pnFundo.add(pnRodaPe);
 
         getContentPane().add(pnFundo);
     }
 
     private void construindoBarraDeMenu() {
         menu = new JMenuBar();
-        setJMenuBar(menu);
+        //setJMenuBar(menu);
 
         mnuCadastros = new JMenu("Menu");
         menu.add(mnuCadastros);
