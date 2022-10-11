@@ -16,7 +16,7 @@ public class ConexaoPostgres{
     private static final String URL = "jdbc:postgresql://localhost:5432/vacina";    
     private static final String DRIVER = "org.postgresql.Driver";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "postgres";
+    private static final String PASSWORD = "";
     private static ConexaoPostgres instanciaSingleton = null;
 
     private ConexaoPostgres() {
