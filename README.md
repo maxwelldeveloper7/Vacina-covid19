@@ -1,42 +1,73 @@
 # Vacina COVID-19
 
-Bem-vindo ao repositório do projeto Vacina COVID-19! Este é um sistema desenvolvido em Java para gerenciar a vacinação contra a COVID-19. Utiliza o banco de dados PostgreSQL para armazenar informações essenciais.
+## Contexto
+O projeto **Vacina COVID-19** é um sistema desenvolvido para gerenciar a vacinação contra a COVID-19. Os agentes de saúde cadastram os usuários do SUS pelos quais são responsáveis, e no momento da vacinação no **drive-thru**, eles serão identificados e imunizados. O sistema registrará as doses ministradas.
 
+Este sistema foi desenvolvido para **computadores desktop e notebooks** e pode ser executado em qualquer sistema operacional que tenha uma **máquina virtual Java** instalada. Os dados são persistidos em um **SGDB PostgreSQL** disponibilizado em nuvem (**SaaS**).
+
+---
 
 ## Requisitos
+- **JDK 8** ou superior.
+- Um **servidor em nuvem** com **SGDB PostgreSQL 10**.
 
-- JDK 8 ou superior
-- Servidor PostgreSQL
+---
 
-## Configuração
+## Instalação
+### Configuração do Banco de Dados
+1. **Provisionar um serviço RDBS** (PostgreSQL 10) na nuvem.
+2. **Criar o banco de dados** chamado `vacina`.
+3. **Acessar o banco** utilizando o **pgAdmin** ou qualquer outro cliente PostgreSQL.
+4. **Executar o script SQL** contido no arquivo `base.sql` para criar as tabelas e registros iniciais.
 
-1. Clone este repositório para o seu ambiente local.
+### Configuração do Sistema
+1. **Clonar o repositório** em cada computador que será utilizado:
    ```bash
-   git clone https://github.com/maxwelldeveloper7/Vacina-covid19.git
+   git clone https://github.com/seuusuario/vacina-covid.git
+   ```
+2. **Navegar até a pasta do projeto**:
+   ```bash
+   cd vacina-covid
+   ```
+3. **Executar o arquivo principal**:
+   ```bash
+   java -cp . Main
    ```
 
-2. Certifique-se de ter o JDK instalado no seu sistema.
-   
-3. Configure o servidor PostgreSQL e crie um banco de dados para o projeto.
+---
 
-4. Altere as configurações do banco de dados no arquivo `configuracoes.properties`.
+## Uso
+- **Cadastro de usuários do SUS** pelos agentes de saúde.
+- **Registro das vacinações** no drive-thru.
+- **Consulta e acompanhamento** das doses ministradas.
 
-5. Execute a aplicação.
-
-## Notas Importantes
-
-- Certifique-se de ter o JDK 8 ou superior instalado no seu sistema.
-- É necessário configurar um servidor PostgreSQL e criar um banco de dados.
-
-## Contribuindo
-
-Contribuições são bem-vindas! Se encontrar problemas ou tiver sugestões de melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+---
 
 ## Tecnologias Utilizadas
+- **Java 8+**
+- **PostgreSQL 10**
+- **pgAdmin** (para administração do banco de dados)
 
-- Java
-- PostgreSQL
+---
+
+## Contribuição
+Caso queira contribuir com melhorias no projeto, siga as etapas:
+1. Faça um **fork** do repositório.
+2. Crie uma **branch** para suas alterações:
+   ```bash
+   git checkout -b minha-melhoria
+   ```
+3. Realize as alterações e faça **commit**:
+   ```bash
+   git commit -m "Descrição da melhoria"
+   ```
+4. Faça um **push** para o seu fork:
+   ```bash
+   git push origin minha-melhoria
+   ```
+5. Abra um **Pull Request** no repositório principal.
+
+---
 
 ## Licença
-
-Este projeto é licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto é licenciado sob a [MIT License](LICENSE).
