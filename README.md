@@ -1,8 +1,5 @@
 
 
-<img src="http://img.shields.io/static/v1?label=License&message=MIT&color=green&style=for-the-badge"/>  
-<img src="http://img.shields.io/static/v1?label=STATUS&message=%20FINALIZADO&color=critical&style=for-the-badge"/>  
-
 # 💉 Vacina COVID-19 - Sistema de Gerenciamento de Vacinação
 <div align='center'><img src='./src/vacinacovid/visao/vacina.png'/></div>
 
